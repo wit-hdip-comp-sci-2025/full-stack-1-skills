@@ -7,7 +7,7 @@ metadata:
 
 # MongoDB seeding
 
-Reference implementation: **playtime-0.10.0** (seed-data.js, seed.js, app.js wiring).
+Covers seed-data structure, seeder implementation, and app.js wiring.
 
 ## 1. Seed data structure
 

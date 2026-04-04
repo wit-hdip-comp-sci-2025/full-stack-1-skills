@@ -7,7 +7,7 @@ metadata:
 
 # JWT API authentication
 
-Reference implementation: **playtime-0.9.0** (JWT auth for API; session for web).
+JWT authentication for API routes while keeping cookie-based session auth for the web layer.
 
 ## Dependencies
 

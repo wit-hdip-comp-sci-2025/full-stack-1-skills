@@ -29,9 +29,10 @@ const collectionSchema = new mongoose.Schema({
   userid: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 });
 
+// Item fields beyond title and collectionid are domain-specific — adapt to your app
 const itemSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  artist: { type: String, required: true },
+  artist: { type: String },
   duration: { type: Number, default: 0 },
   collectionid: { type: mongoose.Schema.Types.ObjectId, ref: "Collection", required: true },
 });
@@ -46,7 +47,7 @@ export const Item = mongoose.model("Item", itemSchema);
 ```javascript
 // models/mongo/connection.js
 export async function connect() {
-  const uri = process.env.db || "mongodb://localhost:27017/playtime";
+  const uri = process.env.db || "mongodb://localhost:27017/myapp";
   await mongoose.connect(uri);
 }
 
@@ -104,6 +105,6 @@ async disconnect() {
 ## Environment
 
 ```
-db=mongodb://localhost:27017/playtime
+db=mongodb://localhost:27017/myapp
 store=mongo
 ```

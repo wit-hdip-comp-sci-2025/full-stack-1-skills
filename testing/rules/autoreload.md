@@ -47,7 +47,7 @@ Create `nodemon.json` in the project root so restarts are predictable and you av
 | Option   | Purpose                                                                      |
 | -------- | ---------------------------------------------------------------------------- |
 | `watch`  | Directories to watch (e.g. `["src"]`; omit to watch cwd)                     |
-| `ext`    | File extensions that trigger restart (default includes `js,mjson`)           |
+| `ext`    | File extensions that trigger restart (default includes `js,mjs,json`)        |
 | `ignore` | Glob patterns to ignore; exclude data files and tests to avoid restart loops |
 | `delay`  | Debounce restarts (ms) so one save doesn't trigger multiple restarts        |
 

@@ -33,7 +33,7 @@ await server.register(Cookie);
 
 server.auth.strategy("session", "cookie", {
   cookie: {
-    name: "playtime",
+    name: "sid",
     password: process.env.cookie_password, // 32+ chars
     isSecure: false, // true in production
     isSameSite: "Lax",
@@ -78,4 +78,4 @@ return h.redirect("/");
 
 ## User store interface
 
-Stores must implement: `addUser`, `getUserById`, `getUserByEmail`, `deleteAllUsers`. Use uuid for `_id` in mem store.
+Stores must implement: `addUser`, `getUserById`, `getUserByEmail`, `deleteAll`. Use uuid for `_id` in mem store.

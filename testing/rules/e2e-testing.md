@@ -37,7 +37,7 @@ test/
 // fixtures.js
 export const maggie = { firstName: "Maggie", lastName: "Simpson", email: "maggie@simpson.com", password: "secret" };
 export const sampleCollection = { title: "Beethoven Sonatas" };
-export const sampleItem = { title: "Piano Concerto No. 1", artist: "Beethoven", duration: 35 };
+export const sampleItem = { title: "Piano Concerto No. 1", artist: "Beethoven", duration: 35 }; // fields after title are domain-specific
 
 // test-utils.js
 export function assertSubset(subset, superset) {
@@ -87,10 +87,55 @@ export default {
 - Wait for redirects: `await expect(page).toHaveURL("/dashboard")`
 - Use mem store (`store=mem`) or `fullyParallel: false` if tests share state
 
+## In-process API testing with server.inject()
+
+Use the `createServer()` pattern (see [hapi-web foundations](../../hapi-web/rules/foundations.md)) to test API handlers without an HTTP listener:
+
+```javascript
+import { createServer } from "../../src/app.js";
+
+let server;
+
+setup(async () => {
+  server = await createServer();
+  await db.userStore.deleteAll();
+});
+
+test("create user via API", async () => {
+  const res = await server.inject({
+    method: "POST",
+    url: "/api/users",
+    payload: maggie,
+    headers: { "Content-Type": "application/json" },
+  });
+  assert.equal(res.statusCode, 201);
+  assertSubset(maggie, JSON.parse(res.payload));
+});
+```
+
+## Coordinating server + tests with start-server-and-test
+
+For integration tests that need a running HTTP server:
+
+```json
+"devDependencies": {
+  "start-server-and-test": "^2.0.12"
+}
+```
+
+```json
+"scripts": {
+  "test:api": "start-server-and-test start http://localhost:3000 test:integration"
+}
+```
+
+This starts the server, waits for the URL to respond, runs the test command, then shuts down.
+
 ## NPM scripts
 
 ```json
 "test": "mocha --ui tdd test/models/**/*.js",
 "test:e2e": "npx playwright test",
-"test:e2e:ui": "npx playwright test --ui"
+"test:e2e:ui": "npx playwright test --ui",
+"test:api": "start-server-and-test start http://localhost:3000 test:integration"
 ```

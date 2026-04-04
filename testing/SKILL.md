@@ -16,7 +16,7 @@ Use this skill when you need to:
 
 ## How to use
 
-- **E2E and unit testing**: [rules/e2e-testing.md](rules/e2e-testing.md) — Mocha/Chai, Playwright config, fixtures, assertSubset, setup order, E2E auth and isolation.
+- **E2E and unit testing**: [rules/e2e-testing.md](rules/e2e-testing.md) — Mocha/Chai, Playwright config, fixtures, assertSubset, setup order, E2E auth and isolation, `server.inject()` for in-process API tests, `start-server-and-test` for integration tests.
 - **Auto-reload**: [rules/autoreload.md](rules/autoreload.md) — nodemon, dev vs start scripts, nodemon.json, avoiding restart loops.
 
 Refer to the rule that matches your task.
